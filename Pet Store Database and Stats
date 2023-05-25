@@ -1,0 +1,43 @@
+CREATE TABLE Pet_Store (ID INTEGER PRIMARY KEY, Item TEXT, Price INTEGER, Size TEXT, Animal TEXT, Color TEXT, Amt_Stock INTEGER, Amt_Sold INTEGER);
+INSERT INTO Pet_Store VALUES (1, "Collar", 15, "Large", "Dog", "Red", 20, 15);
+INSERT INTO Pet_Store VALUES (2, "Water Bowl", 8, "Small", "Cat/Dog", "Blue", 20, 10);
+INSERT INTO Pet_Store VALUES (3, "Leash", 20, "Large", "Dog", "Black", 30, 29);
+INSERT INTO Pet_Store VALUES (4, "Bed", 100, "Medium", "Cat/Dog", "White", 5, 3);
+INSERT INTO Pet_Store VALUES (5, "Leash", 15, "Medium", "Dog", "Pink", 20, 18);
+INSERT INTO Pet_Store VALUES (6, "Bed", 150, "Large", "Dog", "Brown", 5, 2);
+INSERT INTO Pet_Store VALUES (7, "Collar", 5, "Small", "Cat", "Red", 10, 4);
+INSERT INTO Pet_Store VALUES (8, "Collar", 8, "Medium", "Cat/Dog", "Green", 10, 9);
+INSERT INTO Pet_Store VALUES (9, "Ball", 10, "Small", "Cat", "White", 15, 5);
+INSERT INTO Pet_Store VALUES (10, "Ball", 15, "Medium", "Cat/Dog", "Red", 15, 13);
+INSERT INTO Pet_Store VALUES (11, "Ball", 20, "Large", "Dog", "Blue", 15, 9);
+INSERT INTO Pet_Store VALUES (12, "Bed", 50, "Small", "Dog", "Beige", 10, 4);
+INSERT INTO Pet_Store VALUES (13, "Collar", 15, "Large", "Dog", "Black", 10, 6);
+INSERT INTO Pet_Store VALUES (14, "Leash", 10, "Small", "Cat/Dog", "Blue", 10, 3);
+INSERT INTO Pet_Store VALUES (15, "Leash", 30, "X-Large", "Dog", "Brown", 10, 2);
+
+--Display the database in order of lowest to highest price
+SELECT * FROM Pet_Store ORDER BY Price ASC;
+
+--What is the most expensive item?
+SELECT MAX(Price) FROM Pet_Store;
+
+--What is the total expected profit if we sell all stock?
+SELECT SUM(Price) FROM Pet_Store;
+
+--Display the database in order of item name and size
+Select * FROM Pet_Store ORDER BY Item and Size;
+
+--What are the prices of all the leashes for sale?
+SELECT * FROM Pet_Store WHERE Item = "Leash" ORDER BY Price ASC;
+
+--Which items sold out? Display by item and their price
+SELECT * FROM Pet_Store WHERE Amt_Sold = Amt_Stock ORDER BY Item and Price;
+
+--What is the average price of a dog item?
+SELECT AVG(Price) AS "Average Dog Item Price" FROM Pet_Store WHERE Animal = "Dog";
+
+--Which items do we still have in stock (did not sell all items)?
+SELECT * FROM Pet_Store WHERE Amt_Stock > Amt_Sold ORDER BY Item and Price;
+
+--What are the earnings of each item? Display in order of total earnings and include the item size and animal it is intended for
+SELECT Item, Size, Animal, Price, Amt_Sold, Price * Amt_Sold AS TotalEarnings FROM Pet_Store ORDER BY TotalEarnings;
