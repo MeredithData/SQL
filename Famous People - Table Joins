@@ -1,0 +1,60 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE SM_Soloists 
+(ID INTEGER PRIMARY KEY autoincrement,
+Artist_Name TEXT,
+Genre1 TEXT,
+Genre2 TEXT,
+Debut_Year INTEGER);
+
+
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Taemin", "Pop", "R&B", 2008);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Taeyeon", "Pop Rock", "R&B", 2007);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Hyoyeon", "Pop", "EDM", 2007);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Key", "PBR&B", "Electronic", 2008);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Onew", "R&B", "Ballad", 2008);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Kai", "R&B", "Hip-Hop", 2011);
+INSERT INTO SM_Soloists (Artist_Name, Genre1, Genre2, Debut_Year)
+VALUES ("Wendy", "Pop", "Ballad", 2014);
+
+CREATE TABLE Kpop_Instagram (
+Artist_ID INTEGER,
+Instagram TEXT,
+Age INTEGER);
+
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (1, "@lm_____ltm", 29);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (2, "@taeyeon_ss", 34);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (3, "@hyoyeon_x_x", 33);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (4, "@bumkeyk", 31);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (5, "@dlstmxkakwldrl", 33);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (6, "@zkdlin", 29);
+INSERT INTO Kpop_Instagram (Artist_ID, Instagram, Age) Values (7, "@todayis_wendy", 29);
+
+CREATE TABLE Kpop_Albums (
+Artist_ID INTEGER,
+Album_Name TEXT,
+Title_Track TEXT);
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (1, "Press It", "Press Your Number");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (2, "My Voice", "Fine");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (3, "Deep", "Deep");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (4, "Face", "One of Those Nights");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (5, "Circle", "O (Circle)");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (6, "Kai", "Mmmh");
+INSERT INTO Kpop_Albums (Artist_ID, Album_Name, Title_Track) Values (7, "Like Water", "Like Water");
+
+--What are the instagram handles for each of the singers shown in the soloist table?
+SELECT SM_Soloists.Artist_Name, Kpop_Instagram.Instagram
+FROM SM_Soloists
+JOIN Kpop_Instagram
+ON SM_Soloists.ID = Kpop_Instagram.Artist_ID;
+
+--Who are the artists of each album from the Kpop_Albums table?
+SELECT Kpop_Albums.Album_Name, SM_Soloists.Artist_Name
+FROM SM_Soloists
+JOIN Kpop_Albums ON SM_Soloists.ID = Kpop_Albums.Artist_ID
