@@ -1,0 +1,23 @@
+/* What does the app's SQL look like? */
+
+CREATE TABLE Map_My_Walk (
+ID INTEGER PRIMARY KEY autoincrement,
+UserID INTEGER,
+Date TEXT,
+Time TEXT,
+Distance_KM INTEGER,
+Duration TEXT,
+Avg_Pace TEXT,
+Steps TEXT,
+Calories INTEGER,
+Comment TEXT);
+
+INSERT INTO Map_My_Walk (UserID, Date, Time, Distance_KM, Duration, Avg_Pace, Steps, Calories, Comment) VALUES (1, "April 4, 2023", "10:25AM", 1.9, "31:15", "16:18", "2.9K", 115, "Nice sunny day and the dogs were happy to be walking at a relaxed pace.");
+INSERT INTO Map_My_Walk (UserID, Date, Time, Distance_KM, Duration, Avg_Pace, Steps, Calories, Comment) VALUES (1, "April 5, 2023", "10:00AM", 2.1, "35:15", "15:18", "3.1K", 180, "Cloudy today, but my walk was longer and faster. Yay!");
+INSERT INTO Map_My_Walk (UserID, Date, Time, Distance_KM, Duration, Avg_Pace, Steps, Calories, Comment) VALUES (1, "April 6, 2023", "9:00AM", 2.0, "35:00", "17:18", "3.1K", 180, "I need to get some new shoes, but the walk was nice.");
+
+--How do I edit the comments for a specific day and walk?
+UPDATE Map_My_Walk SET Comment = "Nice sunny day and the dogs were happy to be walking at a relaxed pace. I hope it is this nice weather a long time!" WHERE Date= "April 4, 2023" AND UserID = 1;
+
+--Remove the exercise data from April 5, 2023
+DELETE FROM Map_My_Walk WHERE Date = "April 5, 2023";
