@@ -1,53 +1,102 @@
-SELECT * FROM BIT_DB.Spotifydata
+#1. Display the artists and tracks in such a way where we can easily identify which artists created which tracks, and which artists appear on the list multiple times.
 
-SELECT track_name from BIT_DB.Spotifydata
-WHERE id <=5
+Select artist_name, track_name, id AS "Rank/50" 
+FROM BIT_DB.Spotifydata
+ORDER BY artist_name
 
-SELECT avg(danceability) AS "Danceability Rating of Top 5 Songs" from BIT_DB.Spotifydata
-WHERE id<=5
+#2. What is the dancability rating of each individual song? Show the track name and artists with their rating. Order by
+the rating on the Top 50.
 
-SELECT id, artist_name, track_name from BIT_DB.Spotifydata
-WHERE artist_name = "Doja Cat"
+SELECT track_name, artist_name, danceability AS "Danceability Rating"
+FROM BIT_DB.Spotifydata
+GROUP BY id
 
-SELECT AVG(popularity) from BIT_DB.Spotifydata
+#3. What is the average popularity of all the songs on the Spotify Top 50?
 
-SELECT AVG(popularity) from BIT_DB.Spotifydata
-WHERE artist_name = "Doja Cat"
+SELECT AVG(popularity) 
+FROM BIT_DB.Spotifydata
 
-SELECT id, track_name, artist_name, popularity FROM BIT_DB.Spotifydata
+#4. What songs on the Spotify Top 50 have a rating higher than the average popularity rating? 
+Show their rating, track name, the artist, and popularity rating.
+
+SELECT id, track_name, artist_name, popularity 
+FROM BIT_DB.Spotifydata
 WHERE popularity <(Select AVG(popularity) FROM BIT_DB.Spotifydata)
 ORDER BY popularity ASC
 
-SELECT id AS Rank, track_name FROM BIT_DB.Spotifydata
-WHERE artist_name = "Olivia Rodrigo"
+#5. What is the duration of each song? Display the tracks in order of their duration from shortest to longest.
+SELECT track_name, duration_ms 
+FROM BIT_DB.Spotifydata
+ORDER BY duration_ms
 
-SELECT track_name, artist_name, danceability AS Danceability_Rating FROM BIT_DB.Spotifydata
-GROUP BY track_name
+#6. What is the average duration of the songs on the Spotify Top 50?
 
-SELECT id, artist_name, popularity FROM BIT_DB.Spotifydata
-ORDER BY popularity DESC Limit 10
+SELECT AVG(duration_ms) 
+FROM BIT_DB.Spotifydata
 
-SELECT artist_name, track_name, duration_ms FROM BIT_DB.Spotifydata
+#7. What is the song with the longest duration, and how long is it?
+SELECT artist_name, track_name, duration_ms 
+FROM BIT_DB.Spotifydata
 ORDER BY duration_ms DESC Limit 1
 
-SELECT AVG(danceability) AS "Top Ten Songs Average Danceability Rating" FROM BIT_DB.Spotifydata
+#8. What is the song with the shortest duration, and how long is it?
+SELECT track_name AS Shortest_Song, Min(duration_ms) AS Duration 
+FROM BIT_DB.Spotifydata
+
+#9. Alterantive way to find the longest duration song:
+SELECT artist_name, track_name, MAX(duration_ms) 
+FROM BIT_DB.Spotifydata
+
+#10. What is the difference between the longest song and shortest song? 
+SELECT (MAX(duration_ms)-MIN(duration_ms)) AS "Time Difference between Longest and Shortest Song" FROM BIT_DB.Spotifydata
+
+#11. What song has the highest energy rating, and what is its ranking, track name, and popularity rating?
+SELECT id, track_name, popularity 
+FROM BIT_DB.Spotifydata 
+WHERE energy = (Select MAX(energy) FROM BIT_DB.Spotifydata)
+
+#12. What are the top 5 songs on the Spotify Top 50, ordered by artist and track name?
+SELECT track_name, track_artist 
+FROM BIT_DB.Spotifydata
+WHERE id <=5
+
+#13. What is the average danceability rating for the top 5 songs on Spotify Top 50?
+
+SELECT AVG(danceability) AS "Danceability Rating of Top 5 Songs" 
+FROM BIT_DB.Spotifydata
+WHERE id<=5
+
+#14. Who are the 10 artists with the highest popularity ratings on the Spotify Top 50? Show the artist name and ranking.
+
+SELECT id, artist_name, popularity 
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC Limit 10
+
+#15. What is the average danceability of the ten songs with the highest popularity rating?
+SELECT AVG(danceability) AS "Top Ten Popular Songs Average Danceability Rating" 
+FROM BIT_DB.Spotifydata
 WHERE (SELECT popularity FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC Limit 10)
 
-SELECT track_name AS Shortest_Song, Min(duration_ms) AS Duration FROM BIT_DB.Spotifydata
+#16. What songs by Doja Cat are on the Spotify Top 50?
+SELECT id, artist_name, track_name from BIT_DB.Spotifydata
+WHERE artist_name = "Doja Cat"
 
-SELECT id, track_name, popularity FROM BIT_DB.Spotifydata 
-WHERE energy = (Select MAX(energy) FROM BIT_DB.Spotifydata)
+#17. What is the average popularity rating of songs by Doja Cat on the Spotify Top 50?
+SELECT AVG(popularity) from BIT_DB.Spotifydata
+WHERE artist_name = "Doja Cat"
 
+#18. What songs by Olivia Rodrigo are on the Spotify Top 50?
+SELECT id AS Rank, track_name FROM BIT_DB.Spotifydata
+WHERE artist_name LIKE "%Olivia Rodrigo%"
 
-SELECT AVG(duration_ms) FROM BIT_DB.Spotifydata
-SELECT MAX(duration_ms) FROM BIT_DB.Spotifydata
-SELECT MIN(duration_ms) FROM BIT_DB.Spotifydata
-
-SELECT (MAX(duration_ms)-MIN(duration_ms)) AS "Time Difference between Longest and Shortest Song" FROM BIT_DB.Spotifydata
-
-Select artist_name, track_name, id AS "Rank/50" FROM BIT_DB.Spotifydata
-ORDER BY artist_name
-
-SELECT COUNT(id) AS "Amount of Songs by BTS in the Spotify Top 50" FROM BIT_DB.Spotifydata
+#19. How many songs on the Top 50 Playist are by BTS?
+SELECT COUNT(id) AS "Amount of Songs by BTS in the Spotify Top 50" 
+FROM BIT_DB.Spotifydata
 WHERE artist_name LIKE "%BTS%"
+
+
+
+
+
+
