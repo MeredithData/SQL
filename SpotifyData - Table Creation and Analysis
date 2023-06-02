@@ -1,0 +1,53 @@
+SELECT * FROM BIT_DB.Spotifydata
+
+SELECT track_name from BIT_DB.Spotifydata
+WHERE id <=5
+
+SELECT avg(danceability) AS "Danceability Rating of Top 5 Songs" from BIT_DB.Spotifydata
+WHERE id<=5
+
+SELECT id, artist_name, track_name from BIT_DB.Spotifydata
+WHERE artist_name = "Doja Cat"
+
+SELECT AVG(popularity) from BIT_DB.Spotifydata
+
+SELECT AVG(popularity) from BIT_DB.Spotifydata
+WHERE artist_name = "Doja Cat"
+
+SELECT id, track_name, artist_name, popularity FROM BIT_DB.Spotifydata
+WHERE popularity <(Select AVG(popularity) FROM BIT_DB.Spotifydata)
+ORDER BY popularity ASC
+
+SELECT id AS Rank, track_name FROM BIT_DB.Spotifydata
+WHERE artist_name = "Olivia Rodrigo"
+
+SELECT track_name, artist_name, danceability AS Danceability_Rating FROM BIT_DB.Spotifydata
+GROUP BY track_name
+
+SELECT id, artist_name, popularity FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC Limit 10
+
+SELECT artist_name, track_name, duration_ms FROM BIT_DB.Spotifydata
+ORDER BY duration_ms DESC Limit 1
+
+SELECT AVG(danceability) AS "Top Ten Songs Average Danceability Rating" FROM BIT_DB.Spotifydata
+WHERE (SELECT popularity FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC Limit 10)
+
+SELECT track_name AS Shortest_Song, Min(duration_ms) AS Duration FROM BIT_DB.Spotifydata
+
+SELECT id, track_name, popularity FROM BIT_DB.Spotifydata 
+WHERE energy = (Select MAX(energy) FROM BIT_DB.Spotifydata)
+
+
+SELECT AVG(duration_ms) FROM BIT_DB.Spotifydata
+SELECT MAX(duration_ms) FROM BIT_DB.Spotifydata
+SELECT MIN(duration_ms) FROM BIT_DB.Spotifydata
+
+SELECT (MAX(duration_ms)-MIN(duration_ms)) AS "Time Difference between Longest and Shortest Song" FROM BIT_DB.Spotifydata
+
+Select artist_name, track_name, id AS "Rank/50" FROM BIT_DB.Spotifydata
+ORDER BY artist_name
+
+SELECT COUNT(id) AS "Amount of Songs by BTS in the Spotify Top 50" FROM BIT_DB.Spotifydata
+WHERE artist_name LIKE "%BTS%"
